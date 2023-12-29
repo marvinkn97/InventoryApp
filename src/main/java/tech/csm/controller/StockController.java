@@ -51,6 +51,9 @@ public class StockController {
                 case 2:
                     insertStock();
                     break;
+                case 3:
+                    updateStock();
+                    break;
                 case 5:
                     List<MaterialMasterVO> materialMasterVOList = materialMasterService.getAllMaterials();
                     for (MaterialMasterVO x : materialMasterVOList) {
@@ -116,6 +119,33 @@ public class StockController {
 
             stockService.insertStock(stockDetailsVO);
 
+        }
+    }
+
+    public static void updateStock() {
+        System.out.println("Enter Stock ID");
+
+        String id = ss.nextLine().trim().toUpperCase();
+
+        StockDetailsVO exists = stockService.getStockById(id);
+
+        if (exists == null) {
+            System.out.println("Invalid Stock ID");
+            return;
+        } else {
+            printNameAndQty();
+        }
+
+
+    }
+
+    public static void printNameAndQty() {
+        List<StockDetailsVO> stockDetailsVOList = stockService.getAllStocks();
+
+        if (!stockDetailsVOList.isEmpty()) {
+            for (StockDetailsVO x : stockDetailsVOList) {
+                System.out.println(x.getMaterialMasterVO().getMaterialName() + " - " + x.getQuantity());
+            }
         }
     }
 

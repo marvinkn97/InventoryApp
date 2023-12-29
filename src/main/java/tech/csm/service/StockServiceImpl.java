@@ -9,6 +9,7 @@ import tech.csm.entity.StockDetails;
 import tech.csm.entity.StockDetailsVO;
 import tech.csm.util.StockUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StockServiceImpl implements StockService {
@@ -41,14 +42,26 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public List<StockDetailsVO> getAllStocks() {
-        return null;
+        List<StockDetails> stockDetailsList = stockDetailsDao.getAllStocks();
+
+        List<StockDetailsVO> stockDetailsVOList = null;
+
+        if (stockDetailsList != null) {
+            stockDetailsVOList = new ArrayList<>();
+
+            for (StockDetails stockDetails : stockDetailsList) {
+                StockDetailsVO stockDetailsVO = StockUtil.mapStockEntityToVO(stockDetails);
+                stockDetailsVOList.add(stockDetailsVO);
+            }
+        }
+        return stockDetailsVOList;
     }
 
     @Override
     public StockDetailsVO getStockById(String id) {
         StockDetails stockDetails = stockDetailsDao.getStockById(id);
         StockDetailsVO stockDetailsVO = null;
-        if(stockDetails != null){
+        if (stockDetails != null) {
             stockDetailsVO = StockUtil.mapStockEntityToVO(stockDetails);
         }
         return stockDetailsVO;

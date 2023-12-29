@@ -53,11 +53,13 @@ public class StockDetailsJdbcImpl implements StockDetailsDao{
                 stockDetailsList = new ArrayList<>();
                 do {
                     StockDetails stockDetails = new StockDetails();
-                    stockDetails.setStockId(resultSet.getString(""));
+                    stockDetails.setStockId(resultSet.getString("stock_id"));
 
                     MaterialMaster  materialMaster = materialMasterDao.getMaterialById(resultSet.getInt("material_id"));
 
                     stockDetails.setMaterialMaster(materialMaster);
+
+                    stockDetails.setQuantity(resultSet.getInt("qty"));
 
                     stockDetailsList.add(stockDetails);
 
