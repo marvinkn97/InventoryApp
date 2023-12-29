@@ -18,7 +18,7 @@ public class DBUtil {
         dataSource.setPassword("1234");
 
         // Connection pool settings
-        dataSource.setInitialSize(5);  // Initial number of connections in the pool
+        dataSource.setInitialSize(10);  // Initial number of connections in the pool
         dataSource.setMaxOpenPreparedStatements(20);    // Maximum number of active connections
         dataSource.setMaxIdle(10);      // Maximum number of idle connections
         dataSource.setMinIdle(5);       // Minimum number of idle connections

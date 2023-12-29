@@ -4,6 +4,7 @@ import tech.csm.entity.MaterialMasterVO;
 import tech.csm.service.MaterialMasterService;
 import tech.csm.service.MaterialMasterServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class StockController {
@@ -41,10 +42,34 @@ public class StockController {
                 String msg = materialMasterService.insertMaterial(materialMasterVO);
                 System.out.println(msg);
                 break;
+            case 2:
+                System.out.println("Choose material name");
+                printMaterialNames();
+
+                System.out.println("Enter Stock ID");
+                String id = ss.nextLine().trim();
+                int qty = sc.nextInt();
+
+
+                break;
+            case  5:
+                List<MaterialMasterVO> materialMasterVOList = materialMasterService.getAllMaterials();
+                for (MaterialMasterVO x : materialMasterVOList){
+                    System.out.println(x);
+                }
+                break;
             default:
                 System.out.println("Invalid choice please try again");
         }
 
+    }
+
+    public static void printMaterialNames(){
+        List<MaterialMasterVO> materialMasterVOList =  materialMasterService.getAllMaterials();
+
+        for (MaterialMasterVO materialMasterVO : materialMasterVOList){
+            System.out.println(materialMasterVO.getMaterialName());
+        }
     }
 
 }

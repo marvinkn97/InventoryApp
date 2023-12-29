@@ -5,6 +5,7 @@ import tech.csm.dao.MaterialMasterJdbcImpl;
 import tech.csm.entity.MaterialMaster;
 import tech.csm.entity.MaterialMasterVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialMasterServiceImpl implements MaterialMasterService{
@@ -27,7 +28,23 @@ public class MaterialMasterServiceImpl implements MaterialMasterService{
 
     @Override
     public List<MaterialMasterVO> getAllMaterials() {
-        return null;
+
+        List<MaterialMaster> materialMasterList = materialMasterDao.getAllMaterials();
+        System.out.println(materialMasterList.size());
+
+        List<MaterialMasterVO> materialMasterVOList = null;
+
+        if(materialMasterList!= null){
+            materialMasterVOList = new ArrayList<>();
+
+            for (MaterialMaster materialMaster : materialMasterList){
+                MaterialMasterVO materialMasterVO = new MaterialMasterVO();
+                        materialMasterVO.setMaterialId(materialMaster.getMaterialId().toString());
+                        materialMasterVO.setMaterialName(materialMaster.getMaterialName());
+                        materialMasterVOList.add(materialMasterVO);
+            }
+        }
+        return materialMasterVOList;
     }
 
     @Override
