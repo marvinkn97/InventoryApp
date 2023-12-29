@@ -18,45 +18,49 @@ public class StockController {
 
     public static void main(String[] args) {
 
+        int choice;
 
-        System.out.println("******************************" +
-                "\n*     Stock Information      *" +
-                "\n******************************" +
-                "\n1. Insert Material" +
-                "\n2. Insert Stock" +
-                "\n3. Update Stock" +
-                "\n4. Display Stock " +
-                "\n5. Display Materials " +
-                "\n6. Exit" +
-                "\nEnter Choice 1 - 6");
+        do {
 
-        int choice = sc.nextInt();
+            System.out.println("******************************" +
+                    "\n*     Stock Information      *" +
+                    "\n******************************" +
+                    "\n1. Insert Material" +
+                    "\n2. Insert Stock" +
+                    "\n3. Update Stock" +
+                    "\n4. Display Stock " +
+                    "\n5. Display Materials " +
+                    "\n6. Exit" +
+                    "\nEnter Choice 1 - 6");
 
-        switch (choice) {
-            case 1:
-                System.out.println("Enter name of material");
-                String name = ss.nextLine();
+            choice = sc.nextInt();
 
-                MaterialMasterVO materialMasterVO = new MaterialMasterVO();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter name of material");
+                    String name = ss.nextLine();
 
-                if (!name.isEmpty() && !name.isBlank()) {
-                    materialMasterVO.setMaterialName(name);
-                }
-                String msg = materialMasterService.insertMaterial(materialMasterVO);
-                System.out.println(msg);
-                break;
-            case 2:
-                insertStock();
-                break;
-            case 5:
-                List<MaterialMasterVO> materialMasterVOList = materialMasterService.getAllMaterials();
-                for (MaterialMasterVO x : materialMasterVOList) {
-                    System.out.println(x);
-                }
-                break;
-            default:
-                System.out.println("Invalid choice please try again");
-        }
+                    MaterialMasterVO materialMasterVO = new MaterialMasterVO();
+
+                    if (!name.isEmpty() && !name.isBlank()) {
+                        materialMasterVO.setMaterialName(name);
+                    }
+                    String msg = materialMasterService.insertMaterial(materialMasterVO);
+                    System.out.println(msg);
+                    break;
+                case 2:
+                    insertStock();
+                    break;
+                case 5:
+                    List<MaterialMasterVO> materialMasterVOList = materialMasterService.getAllMaterials();
+                    for (MaterialMasterVO x : materialMasterVOList) {
+                        System.out.println(x);
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice please try again");
+            }
+        } while (choice != 6);
 
     }
 
@@ -72,28 +76,48 @@ public class StockController {
         StockDetailsVO stockDetailsVO = new StockDetailsVO();
 
         System.out.println("Enter Stock ID");
-        String id = ss.nextLine().trim();
 
-        stockDetailsVO.setStockId(id);
+        String id = ss.nextLine().trim().toUpperCase();
 
-        System.out.println("Choose material name");
-        printMaterialNames();
-        String materialName = ss.nextLine().trim();
+        StockDetailsVO exists = stockService.getStockById(id);
 
-        if (materialMasterService.existsMaterialByName(materialName)) {
-            MaterialMasterVO materialMasterVO = materialMasterService.getMaterialByName(materialName);
-            stockDetailsVO.setMaterialMasterVO(materialMasterVO);
-        } else {
-            System.out.println("Material name does not exist");
+        //check if entered ID is already taken
+        if (exists != null) {
+            System.out.println("ID already taken");
             return;
+        } else {
+
+            System.out.println("Do you want to insert?...yes or no");
+
+            String proceed = ss.nextLine().trim();
+
+            if (!proceed.equalsIgnoreCase("yes")) {
+                System.out.println("Exiting");
+                return;
+            }
+            System.out.println("Choose material name");
+            printMaterialNames();
+            String materialName = ss.nextLine().trim();
+
+            stockDetailsVO.setStockId(id);
+
+            if (materialMasterService.existsMaterialByName(materialName)) {
+                MaterialMasterVO materialMasterVO = materialMasterService.getMaterialByName(materialName);
+                stockDetailsVO.setMaterialMasterVO(materialMasterVO);
+            } else {
+                System.out.println("Material name does not exist");
+                return;
+            }
+
+            System.out.println("Enter quantity");
+            String qty = ss.nextLine().trim();
+
+            stockDetailsVO.setQuantity(qty);
+
+            stockService.insertStock(stockDetailsVO);
+
         }
-
-        System.out.println("Enter quantity");
-        String qty = ss.nextLine().trim();
-
-        stockDetailsVO.setQuantity(qty);
-
-        stockService.insertStock(stockDetailsVO);
     }
 
 }
+

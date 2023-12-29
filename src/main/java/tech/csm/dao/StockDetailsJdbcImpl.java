@@ -76,7 +76,34 @@ public class StockDetailsJdbcImpl implements StockDetailsDao{
 
     @Override
     public StockDetails getStockById(String id) {
-        return null;
+        final String sql = "SELECT stock_id, material_id, qty from t_stock_details WHERE stock_id = ?";
+        StockDetails stockDetails = null;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                stockDetails = new StockDetails();
+                stockDetails.setStockId(resultSet.getString("stock_id"));
+
+                MaterialMaster materialMaster = materialMasterDao.getMaterialById(resultSet.getInt("material_id"));
+
+                stockDetails.setMaterialMaster(materialMaster);
+
+                stockDetails.setQuantity(resultSet.getInt("qty"));
+
+            }else{
+                System.out.println("No record with given id found");
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stockDetails;
     }
 
     @Override
@@ -85,7 +112,8 @@ public class StockDetailsJdbcImpl implements StockDetailsDao{
     }
 
     @Override
-    public Integer deleteStock(Integer id) {
+    public Integer deleteStock(String id) {
         return null;
     }
+
 }

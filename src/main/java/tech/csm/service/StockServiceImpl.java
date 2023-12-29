@@ -7,6 +7,7 @@ import tech.csm.dao.StockDetailsJdbcImpl;
 import tech.csm.entity.MaterialMaster;
 import tech.csm.entity.StockDetails;
 import tech.csm.entity.StockDetailsVO;
+import tech.csm.util.StockUtil;
 
 import java.util.List;
 
@@ -45,7 +46,12 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public StockDetailsVO getStockById(String id) {
-        return null;
+        StockDetails stockDetails = stockDetailsDao.getStockById(id);
+        StockDetailsVO stockDetailsVO = null;
+        if(stockDetails != null){
+            stockDetailsVO = StockUtil.mapStockEntityToVO(stockDetails);
+        }
+        return stockDetailsVO;
     }
 
     @Override
@@ -57,4 +63,5 @@ public class StockServiceImpl implements StockService {
     public String deleteStock(String id) {
         return null;
     }
+
 }

@@ -9,5 +9,5 @@ public interface StockDetailsDao {
     List<StockDetails> getAllStocks();
     StockDetails getStockById(String id);
     Integer updateStock(StockDetails stockDetails);
-    Integer deleteStock(Integer id);
+    Integer deleteStock(String id);
 }
