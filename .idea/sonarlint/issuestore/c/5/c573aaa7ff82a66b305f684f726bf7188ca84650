@@ -1,0 +1,18 @@
+
+h	java:S112€"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8œÜ„ËÌ1
+h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ü„ËÌ1
+q
+java:S2095x"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8©Ü„ËÌ1
+r
+java:S2095‹"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8©Ü„ËÌ1
+q
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8©Ü„ËÌ1
+q
+java:S2095X"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8©Ü„ËÌ1
+q
+java:S20955"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8©Ü„ËÌ1
+G	java:S106%"+Replace this use of System.out by a logger.(Ş¾ô±8¬Ü„ËÌ1
+L	java:S106G"+Replace this use of System.out by a logger.(œŞß­ıÿÿÿÿ8®Ü„ËÌ1
+L	java:S106g"+Replace this use of System.out by a logger.(üÓˆ•øÿÿÿÿ8®Ü„ËÌ1
+G	java:S106~"+Replace this use of System.out by a logger.(öÑüÄ8¯Ü„ËÌ1
+H	java:S106"+Replace this use of System.out by a logger.(–÷Éİ8Ç¸•ËÌ1

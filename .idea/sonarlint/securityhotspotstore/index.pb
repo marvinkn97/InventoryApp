@@ -1,0 +1,23 @@
+
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+f
+6src/main/java/tech/csm/controller/StockController.java,c\1\c1f62a0fba37ea2df5da8b2d86db5f08fedd79c1
+a
+1src/main/java/tech/csm/dao/MaterialMasterDao.java,3\0\30a1c1440136638ae8c8d5ed805111b00ce118a8
+f
+6src/main/java/tech/csm/dao/MaterialMasterJdbcImpl.java,6\a\6ae8585cc35cccc971d916a4bfd483dbd5e26ec4
+W
+'src/main/java/tech/csm/util/DBUtil.java,6\0\602b0167bfbf71d4bf11d098dcbca949a437768d
+_
+/src/main/java/tech/csm/dao/StockDetailsDao.java,e\d\edf59aa942a44b485eda88070b9b123b8ce6b917
+d
+4src/main/java/tech/csm/dao/StockDetailsJdbcImpl.java,c\5\c573aaa7ff82a66b305f684f726bf7188ca84650
+`
+0src/main/java/tech/csm/service/StockService.java,f\7\f70699027b164ae610aeab6f83dcb261bea2ae23
+d
+4src/main/java/tech/csm/service/StockServiceImpl.java,5\0\501978aba7c7c118d605566039d0428b2c3acb7b
+m
+=src/main/java/tech/csm/service/MaterialMasterServiceImpl.java,7\1\713dcad4ac2c19a35e4dd27a633dad5d4d4e1a18
+i
+9src/main/java/tech/csm/service/MaterialMasterService.java,2\d\2dfc5c7078bef4592e3a21c2099cfc6a33528ed0

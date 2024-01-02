@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static BasicDataSource dataSource = new BasicDataSource();
-    private static Connection con;
+    private static final BasicDataSource dataSource = new BasicDataSource();
+    private static Connection con = null;
 
     static {
 
@@ -15,7 +15,7 @@ public class DBUtil {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/tech_assess_1");
         dataSource.setUsername("root");
-        dataSource.setPassword("1234");
+        dataSource.setPassword("pass@123");
 
         // Connection pool settings
         dataSource.setInitialSize(10);  // Initial number of connections in the pool
@@ -27,19 +27,30 @@ public class DBUtil {
 
     public static Connection getConnection() {
         try {
-            return dataSource.getConnection();
+            con = dataSource.getConnection();
+            return con;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void closeConnection(Connection con){
-        if(con!=null){
+    public static void closeConnection() {
+        boolean closed = false;
+
+        if (con != null) {
             try {
                 con.close();
+                closed = true;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
+        if (closed) {
+            System.out.println("Connection closed successfully");
+        } else {
+            System.out.println("Connection still open");
+        }
+
     }
 }

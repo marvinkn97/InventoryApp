@@ -69,12 +69,41 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public String updateStock(StockDetailsVO stockDetailsVO) {
-        return null;
+        String output = null;
+
+        if (stockDetailsVO != null) {
+            StockDetails stockDetails = stockDetailsDao.getStockById(stockDetailsVO.getStockId());
+
+            MaterialMaster materialMaster = materialMasterDao.getMaterialById(Integer.parseInt(stockDetailsVO.getMaterialMasterVO().getMaterialId()));
+            stockDetails.setMaterialMaster(materialMaster);
+
+            stockDetails.setQuantity(Integer.parseInt(stockDetailsVO.getQuantity()));
+
+            int update = stockDetailsDao.updateStock(stockDetails);
+
+            if (update == 1) {
+                output = "update successful";
+            } else {
+                output = "Update not successful";
+            }
+        }
+        return output;
     }
 
     @Override
-    public String deleteStock(String id) {
-        return null;
+    public void deleteStock(String id) {
+        StockDetails stockDetails = stockDetailsDao.getStockById(id);
+
+        if (stockDetails != null) {
+            int delete = stockDetailsDao.deleteStock(stockDetails.getStockId());
+            if (delete == 1) {
+                System.out.printf("Stock with id [%s] deleted successfully", id);
+            } else {
+                System.out.println("Error while deleting");
+            }
+        } else {
+            System.out.printf("Stock with given id [%s] not found", id);
+        }
     }
 
 }

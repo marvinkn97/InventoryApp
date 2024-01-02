@@ -10,5 +10,5 @@ public interface StockService {
     List<StockDetailsVO> getAllStocks();
     StockDetailsVO getStockById(String id);
     String updateStock(StockDetailsVO stockDetailsVO);
-    String deleteStock(String id);
+    void deleteStock(String id);
 }
